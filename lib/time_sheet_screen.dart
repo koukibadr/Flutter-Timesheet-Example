@@ -18,6 +18,8 @@ class TimeSheetScreen extends StatelessWidget {
       initialDisplayDate: DateTime.now(),
       showNavigationArrow: true,
       allowViewNavigation: true,
+      showDatePickerButton: true,
+      viewNavigationMode: ViewNavigationMode.none,
       allowedViews: const <CalendarView>[
         CalendarView.day,
         CalendarView.workWeek,
@@ -54,14 +56,14 @@ class TimeSheetScreen extends StatelessWidget {
     regions.addAll([
       TimeRegion(
         startTime: testDuration,
-        endTime: testDuration.add(Duration(hours: 2)),
+        endTime: testDuration.add(const Duration(hours: 2)),
         enablePointerInteraction: false,
         color: Colors.red.withOpacity(0.2),
         text: 'Reservé',
       ),
       TimeRegion(
         startTime: testDuration2,
-        endTime: testDuration2.add(Duration(hours: 1)),
+        endTime: testDuration2.add(const Duration(hours: 1)),
         enablePointerInteraction: false,
         color: Colors.red.withOpacity(0.2),
         text: 'Reservé',
