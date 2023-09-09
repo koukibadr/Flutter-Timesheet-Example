@@ -16,39 +16,54 @@ class TimeSheetScreen extends StatelessWidget {
   Widget _renderTimeslotPicker() {
     return SfCalendar(
       initialDisplayDate: DateTime.now(),
-      view: CalendarView.workWeek,
+      showNavigationArrow: true,
+      allowViewNavigation: true,
+      allowedViews: const <CalendarView>[
+        CalendarView.day,
+        CalendarView.workWeek,
+        CalendarView.month,
+      ],
+      view: CalendarView.month,
       specialRegions: _getTimeRegions(),
-      timeSlotViewSettings: TimeSlotViewSettings(
+      timeSlotViewSettings: const TimeSlotViewSettings(
         startHour: 8,
         endHour: 16,
-        timeInterval: const Duration(minutes: 60),
         nonWorkingDays: <int>[DateTime.sunday],
+        //minimumAppointmentDuration: Duration(minutes: 30)
+      ),
+      blackoutDates: <DateTime>[
+        DateTime(2023, 09, 10),
+        DateTime(2023, 09, 15),
+        DateTime(2023, 09, 20),
+        DateTime(2023, 09, 22),
+        DateTime(2023, 09, 24)
+      ],
+      blackoutDatesTextStyle: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 13,
+        color: Colors.red,
+        decoration: TextDecoration.lineThrough,
       ),
     );
   }
 
   List<TimeRegion> _getTimeRegions() {
     final List<TimeRegion> regions = <TimeRegion>[];
+    var testDuration = DateTime.now().subtract(const Duration(hours: 3));
+    var testDuration2 = DateTime.now().subtract(const Duration(hours: 28));
     regions.addAll([
       TimeRegion(
-        startTime: DateTime.now(),
-        endTime: DateTime.now().add(Duration(hours: 1)),
+        startTime: testDuration,
+        endTime: testDuration.add(Duration(hours: 2)),
         enablePointerInteraction: false,
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.red.withOpacity(0.2),
         text: 'Reservé',
       ),
       TimeRegion(
-        startTime: DateTime.now().add(Duration(hours: 20)),
-        endTime: DateTime.now().add(Duration(hours: 2)),
+        startTime: testDuration2,
+        endTime: testDuration2.add(Duration(hours: 1)),
         enablePointerInteraction: false,
-        color: Colors.grey.withOpacity(0.2),
-        text: 'Reservé',
-      ),
-      TimeRegion(
-        startTime: DateTime(2023, 9, 7, 11),
-        endTime: DateTime.now().add(Duration(hours: 1)),
-        enablePointerInteraction: false,
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.red.withOpacity(0.2),
         text: 'Reservé',
       )
     ]);
