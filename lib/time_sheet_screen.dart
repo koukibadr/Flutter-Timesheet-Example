@@ -8,7 +8,16 @@ class TimeSheetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _renderTimeslotPicker(),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.9,
+                child: _renderTimeslotPicker()),
+            ),
+          ],
+        ),
       ),
     );
   }
